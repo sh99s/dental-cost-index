@@ -1,0 +1,45 @@
+name: dental-cost-index
+base: core24
+version: '2026.1.0'
+summary: Implant cost, oral surgeon supply and tooth loss, 50 US states
+description: |
+  What a dental implant costs in each US state, set against what households
+  there earn and how many oral and maxillofacial surgeons are around to place
+  it. Offline, no network access, no telemetry.
+
+  The data is from the US Census (ACS 2024), the CDC (BRFSS 2020 tooth loss
+  among adults 65+), and KFF via an ADA Health Policy Institute data request.
+  Per-capita rates and cost-as-a-share-of-income figures are derived from
+  those inputs and are labelled as derived.
+
+  Examples:
+
+    dental-cost-index WY
+    dental-cost-index --double-bind
+    dental-cost-index --worst-tooth-loss 10
+    dental-cost-index --csv > states.csv
+    dental-cost-index --sources
+
+  The cost model carries one geographic adjustment, so 44 of 50 states share
+  a single sticker price and only the income denominator varies. There was no
+  sourced figure for a lower-cost-market discount, so the model does not
+  invent one. Full method and limitations are on the project page.
+
+  Not a price quote and not clinical advice.
+
+grade: stable
+confinement: strict
+license: CC-BY-4.0
+
+platforms:
+  amd64:
+  arm64:
+
+apps:
+  dental-cost-index:
+    command: bin/dental-cost-index
+
+parts:
+  dental-cost-index:
+    plugin: python
+    source: .

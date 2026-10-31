@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dental-cost-index"
+version = "2026.1.0"
+description = "Dental implant cost, oral surgeon supply and senior tooth loss for all 50 US states"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [{ name = "Saurabh Sharma" }]
+license = "CC-BY-4.0"
+license-files = ["LICENSE"]
+keywords = [
+  "dental", "dental-implants", "health-economics", "open-data",
+  "public-health", "oral-health", "united-states", "census", "brfss",
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Environment :: Console",
+  "Intended Audience :: Science/Research",
+  "Intended Audience :: End Users/Desktop",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering :: Information Analysis",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://dentalimplantcalc.com/dental-implant-access-gap/"
+Dataset = "https://dentalimplantcalc.com/data/dental-implant-access-gap-2026.csv"
+
+[project.scripts]
+dental-cost-index = "dental_cost_index.cli:main"
+
+[tool.setuptools]
+packages = ["dental_cost_index"]
