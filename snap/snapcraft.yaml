@@ -1,7 +1,13 @@
 name: dental-cost-index
 base: core24
 version: '2026.1.0'
+title: Dental Cost Index
 summary: Implant cost, oral surgeon supply and tooth loss, 50 US states
+icon: snap/gui/icon.png
+website: https://dentalimplantcalc.com/dental-implant-access-gap/
+contact: https://dentalimplantcalc.com/contact/
+source-code: https://github.com/sh99s/dental-cost-index
+issues: https://github.com/sh99s/dental-cost-index/issues
 description: |
   What a dental implant costs in each US state, set against what households
   there earn and how many oral and maxillofacial surgeons are around to place

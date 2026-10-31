@@ -1,0 +1,37 @@
+name: Build snap
+
+# Proves the snap builds and leaves a downloadable .snap artifact.
+# Needed because snapcraft.io's Build-from-GitHub UI was returning HTTP 502
+# on 2026-10-31, so the repo could not be connected to the store builder.
+# No store credentials are used, so this is safe to run on every push.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: snapcore/action-build@v1
+        id: build
+
+      - name: Show what came out
+        run: |
+          ls -lh "${{ steps.build.outputs.snap }}"
+          unsquashfs -l "${{ steps.build.outputs.snap }}" | grep -E 'bin/dental-cost-index$' || true
+
+      - name: Smoke-test the built snap
+        run: |
+          sudo snap install --dangerous "${{ steps.build.outputs.snap }}"
+          dental-cost-index WY
+          dental-cost-index --double-bind
+          test "$(dental-cost-index --csv | wc -l)" -eq 51
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: snap
+          path: ${{ steps.build.outputs.snap }}
